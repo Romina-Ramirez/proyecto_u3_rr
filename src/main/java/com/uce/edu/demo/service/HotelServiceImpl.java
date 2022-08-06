@@ -10,7 +10,7 @@ import com.uce.edu.demo.repository.modelo.Hotel;
 
 @Service
 public class HotelServiceImpl implements IHotelService {
-	
+
 	@Autowired
 	private IHotelRepository hotelRepository;
 
@@ -18,7 +18,7 @@ public class HotelServiceImpl implements IHotelService {
 	public List<Hotel> buscarHotelInnerJoin(String tipoHabitacion) {
 		return this.hotelRepository.buscarHotelInnerJoin(tipoHabitacion);
 	}
-	
+
 	@Override
 	public List<Hotel> buscarHotelInnerJoin() {
 		return this.hotelRepository.buscarHotelInnerJoin();
@@ -28,7 +28,7 @@ public class HotelServiceImpl implements IHotelService {
 	public List<Hotel> buscarHotelOuterJoinLeft(String tipoHabitacion) {
 		return this.hotelRepository.buscarHotelOuterJoinLeft(tipoHabitacion);
 	}
-	
+
 	@Override
 	public List<Hotel> buscarHotelOuterJoinLeft() {
 		return this.hotelRepository.buscarHotelOuterJoinLeft();
@@ -41,12 +41,12 @@ public class HotelServiceImpl implements IHotelService {
 
 	@Override
 	public List<Hotel> buscarHotelJoinWhere(String tipoHabitacion) {
-		return null;
+		return this.hotelRepository.buscarHotelJoinWhere(tipoHabitacion);
 	}
 
 	@Override
 	public List<Hotel> buscarHotelJoinFetch(String tipoHabitacion) {
-		return null;
+		return this.hotelRepository.buscarHotelJoinFetch(tipoHabitacion);
 	}
 
 }
