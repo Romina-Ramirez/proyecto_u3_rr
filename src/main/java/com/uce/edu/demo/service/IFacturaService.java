@@ -12,4 +12,10 @@ public interface IFacturaService {
 
 	public List<Factura> buscarFacturaOuterJoinRight(Integer cantidadDetalle);
 
+	public List<Factura> buscarFacturaJoinWhere(Integer cantidadDetalle);
+
+	public List<Factura> buscarFacturaInnerJoinLazy(Integer cantidadDetalle);
+
+	public List<Factura> buscarFacturaJoinFetch(Integer cantidadDetalle);
+
 }

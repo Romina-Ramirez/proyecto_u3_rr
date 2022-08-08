@@ -3,8 +3,10 @@ package com.uce.edu.demo.repository.modelo;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,12 +30,12 @@ public class Factura {
 	@Column(name = "fact_numero")
 	private String numero;
 
-	@OneToMany(mappedBy = "factura")
+	@OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Detalle> detalles;
 
 	@Override
 	public String toString() {
-		return "Factura [id=" + id + ", fecha=" + fecha + ", numero=" + numero + ", detalles=" + detalles + "]";
+		return "Factura [id=" + id + ", fecha=" + fecha + ", numero=" + numero + "]";
 	}
 
 	// Set y Get

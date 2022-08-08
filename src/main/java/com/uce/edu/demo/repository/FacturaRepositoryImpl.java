@@ -42,4 +42,33 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 		return myQuery.getResultList();
 	}
 
+	@Override
+	public List<Factura> buscarFacturaJoinWhere(Integer cantidadDetalle) {
+		TypedQuery<Factura> myQuery = this.entityManager.createQuery(
+				"SELECT f FROM Factura f, Detalle d WHERE f = d.factura AND d.cantidad = :cantidad", Factura.class);
+		myQuery.setParameter("cantidad", cantidadDetalle);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Factura> buscarFacturaInnerJoinLazy(Integer cantidadDetalle) {
+		TypedQuery<Factura> myQuery = this.entityManager.createQuery(
+				"SELECT f FROM Factura f INNER JOIN f.detalles d WHERE d.cantidad = :cantidad", Factura.class);
+		myQuery.setParameter("cantidad", cantidadDetalle);
+		// Bajo demanda
+		List<Factura> facturas = myQuery.getResultList();
+		for (Factura f : facturas) {
+			f.getDetalles().size();
+		}
+		return facturas;
+	}
+
+	@Override
+	public List<Factura> buscarFacturaJoinFetch(Integer cantidadDetalle) {
+		TypedQuery<Factura> myQuery = this.entityManager.createQuery(
+				"SELECT f FROM Factura f JOIN FETCH f.detalles d WHERE d.cantidad = :cantidad", Factura.class);
+		myQuery.setParameter("cantidad", cantidadDetalle);
+		return myQuery.getResultList();
+	}
+
 }

@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.demo.repository.modelo.Detalle;
 import com.uce.edu.demo.repository.modelo.Factura;
 import com.uce.edu.demo.service.IFacturaService;
 
@@ -26,25 +27,31 @@ public class ProyectoU3RrApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		// Inner
-		List<Factura> facturasInner = this.facturaService.buscarFacturaInnerJoin(2);
-		logger.info("INNER JOIN");
-		for (Factura f : facturasInner) {
+		// Join Where
+		List<Factura> facturasWhere = this.facturaService.buscarFacturaJoinWhere(1);
+		logger.info("RELACIONAMIENTO WHERE");
+		for (Factura f : facturasWhere) {
 			logger.info("Factura: " + f.getNumero() + " " + f.getFecha());
 		}
 
-		// Left
-		List<Factura> facturasLeft = this.facturaService.buscarFacturaOuterJoinLeft(2);
-		logger.info("LEFT JOIN");
-		for (Factura f : facturasLeft) {
+		// Inner Join Lazy
+		List<Factura> facturasLazy = this.facturaService.buscarFacturaInnerJoinLazy(1);
+		logger.info("INNER JOIN LAZY");
+		for (Factura f : facturasLazy) {
 			logger.info("Factura: " + f.getNumero() + " " + f.getFecha());
+			for (Detalle d : f.getDetalles()) {
+				logger.info("Detalles: " + d);
+			}
 		}
 
-		// Right
-		List<Factura> facturasRight = this.facturaService.buscarFacturaOuterJoinRight(2);
-		logger.info("RIGHT JOIN");
-		for (Factura f : facturasRight) {
+		// Fetch Join
+		List<Factura> facturasFetch = this.facturaService.buscarFacturaJoinFetch(1);
+		logger.info("JOIN FETCH");
+		for (Factura f : facturasFetch) {
 			logger.info("Factura: " + f.getNumero() + " " + f.getFecha());
+			for (Detalle d : f.getDetalles()) {
+				logger.info("Detalles: " + d);
+			}
 		}
 
 	}

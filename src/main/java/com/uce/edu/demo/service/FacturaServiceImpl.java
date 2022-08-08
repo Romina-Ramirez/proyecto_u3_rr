@@ -29,4 +29,19 @@ public class FacturaServiceImpl implements IFacturaService {
 		return this.facturaRepository.buscarFacturaOuterJoinRight(cantidadDetalle);
 	}
 
+	@Override
+	public List<Factura> buscarFacturaJoinWhere(Integer cantidadDetalle) {
+		return this.facturaRepository.buscarFacturaJoinWhere(cantidadDetalle);
+	}
+
+	@Override
+	public List<Factura> buscarFacturaInnerJoinLazy(Integer cantidadDetalle) {
+		return this.facturaRepository.buscarFacturaInnerJoinLazy(cantidadDetalle);
+	}
+
+	@Override
+	public List<Factura> buscarFacturaJoinFetch(Integer cantidadDetalle) {
+		return this.facturaRepository.buscarFacturaJoinFetch(cantidadDetalle);
+	}
+
 }
