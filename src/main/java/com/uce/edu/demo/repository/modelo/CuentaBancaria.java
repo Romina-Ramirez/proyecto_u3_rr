@@ -33,7 +33,7 @@ public class CuentaBancaria {
 
 	@OneToMany(mappedBy = "cuentaOrigen")
 	private List<Transferencia> transferenciasOrigen;
-	
+
 	@OneToMany(mappedBy = "cuentaDestino")
 	private List<Transferencia> transferenciasDestino;
 

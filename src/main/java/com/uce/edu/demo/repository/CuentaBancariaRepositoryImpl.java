@@ -1,5 +1,7 @@
 package com.uce.edu.demo.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -8,7 +10,6 @@ import javax.transaction.Transactional.TxType;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.uce.edu.demo.repository.modelo.CuentaBancaria;
 
@@ -21,21 +22,39 @@ public class CuentaBancariaRepositoryImpl implements ICuentaBancariaRepository {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	// Métodos usados para JUnit
 	@Override
-	@Transactional(value = TxType.MANDATORY)
-	public void actualizar(CuentaBancaria cuenta) {
-		this.entityManager.merge(cuenta);
+	public void crear(CuentaBancaria cuenta) {
+		this.entityManager.persist(cuenta);
 	}
 
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
 	public CuentaBancaria leerPorNumero(String numeroCta) {
-		logger.info(
-				"Transacción activa buscarPorNúmero: " + TransactionSynchronizationManager.isActualTransactionActive());
+//		logger.info(
+//				"Transacción activa buscarPorNúmero: " + TransactionSynchronizationManager.isActualTransactionActive());
 		TypedQuery<CuentaBancaria> myQuery = this.entityManager
 				.createQuery("SELECT c FROM CuentaBancaria c WHERE c.numero = :numeroCta", CuentaBancaria.class);
 		myQuery.setParameter("numeroCta", numeroCta);
 		return myQuery.getSingleResult();
+	}
+
+	@Override
+	public List<CuentaBancaria> leerCuentas() {
+		TypedQuery<CuentaBancaria> myQuery = this.entityManager.createQuery("SELECT c FROM CuentaBancaria c",
+				CuentaBancaria.class);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	// @Transactional(value = TxType.MANDATORY)
+	public void actualizar(CuentaBancaria cuenta) {
+		this.entityManager.merge(cuenta);
+	}
+
+	@Override
+	public void eliminar(Integer id) {
+		this.entityManager.remove(id);
 	}
 
 }
