@@ -20,16 +20,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.uce.edu.demo.repository.ICuentaBancariaRepository;
 
-// Busca el Spring Boot Application para configurarse
+//Busca el Spring Boot Application para configurarse
 @SpringBootTest
 class CuentaBancariaTest {
-	
+
 	private static final Logger logger = Logger.getLogger(CuentaBancariaTest.class);
 
 	@Autowired
 	private ICuentaBancariaRepository cuentaBancariaRepository;
 
-	// Se ejecuta una vez, antes de comenzar todos los tests. Esto métodos deben
+	// Se ejecuta una vez, antes de comenzar todos los tests. Estos métodos deben
 	// definirse como static para trabajar con JUnit.
 	@BeforeAll
 	public static void antesClase() {
@@ -38,7 +38,7 @@ class CuentaBancariaTest {
 
 	// Se ejecuta antes de cada test. Normalmente se utiliza para preparar el
 	// entorno de testing (por ejemplo: inicialización de clases, lectura de datos
-	// de entrada....).
+	// de entrada...)
 	@BeforeEach
 	public void antesMetodo() {
 		logger.info("Inicia la prueba de test para el método");
@@ -66,7 +66,7 @@ class CuentaBancariaTest {
 		cuenta.setNumero("0009");
 		cuenta.setSaldo(new BigDecimal(125));
 		cuenta.setTipo("Ahorros");
-		
+
 		// Sirve para afirmar que un tipo de dato u objeto no es nulo.
 		assertNotNull(cuenta, "La cuenta está en null");
 
@@ -94,14 +94,16 @@ class CuentaBancariaTest {
 	public void testActualizar() {
 		CuentaBancaria cuenta = this.cuentaBancariaRepository.leerPorNumero("0005");
 		cuenta.setSaldo(new BigDecimal(724));
-		
-		// Se aseguran de que los dos argumentos que pasamos no son iguales, en caso de que
+
+		// Se aseguran de que los dos argumentos que pasamos no son iguales, en caso de
+		// que
 		// lo sean, la prueba fallará.
-		assertNotEquals(new BigDecimal(724).setScale(2), this.cuentaBancariaRepository.leerPorNumero("0005").getSaldo(), "Los datos son iguales.");
-		
+		assertNotEquals(new BigDecimal(724).setScale(2), this.cuentaBancariaRepository.leerPorNumero("0005").getSaldo(),
+				"Los datos son iguales.");
+
 		this.cuentaBancariaRepository.actualizar(cuenta);
 	}
-	
+
 	// El método de test debe ser desactivado (no se ejecuta).
 	@Disabled
 	@Test

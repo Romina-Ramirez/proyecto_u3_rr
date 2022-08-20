@@ -10,6 +10,7 @@ import javax.transaction.Transactional.TxType;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.uce.edu.demo.repository.modelo.CuentaBancaria;
 
@@ -22,7 +23,6 @@ public class CuentaBancariaRepositoryImpl implements ICuentaBancariaRepository {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	// Métodos usados para JUnit
 	@Override
 	public void crear(CuentaBancaria cuenta) {
 		this.entityManager.persist(cuenta);
@@ -31,8 +31,8 @@ public class CuentaBancariaRepositoryImpl implements ICuentaBancariaRepository {
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
 	public CuentaBancaria leerPorNumero(String numeroCta) {
-//		logger.info(
-//				"Transacción activa buscarPorNúmero: " + TransactionSynchronizationManager.isActualTransactionActive());
+		logger.info(
+				"Transacción activa buscarPorNúmero: " + TransactionSynchronizationManager.isActualTransactionActive());
 		TypedQuery<CuentaBancaria> myQuery = this.entityManager
 				.createQuery("SELECT c FROM CuentaBancaria c WHERE c.numero = :numeroCta", CuentaBancaria.class);
 		myQuery.setParameter("numeroCta", numeroCta);
@@ -47,9 +47,10 @@ public class CuentaBancariaRepositoryImpl implements ICuentaBancariaRepository {
 	}
 
 	@Override
-	// @Transactional(value = TxType.MANDATORY)
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void actualizar(CuentaBancaria cuenta) {
 		this.entityManager.merge(cuenta);
+		// throw new RuntimeException();
 	}
 
 	@Override

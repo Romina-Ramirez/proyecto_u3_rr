@@ -24,7 +24,7 @@ public class TransferenciaServiceImpl implements ITransferenciaService {
 	private ITransferenciaRepository transferenciaRepository;
 
 	@Override
-	@Transactional(value = TxType.REQUIRES_NEW)
+	@Transactional(value = TxType.REQUIRED)
 	public void realizarTransferencia(String numeroCtaOrigen, String numeroCtaDestino, BigDecimal monto) {
 		// 0. Busque la cuenta origen (obtener el saldo)
 		CuentaBancaria ctaOrigen = this.bancariaRepository.leerPorNumero(numeroCtaOrigen);
@@ -49,6 +49,14 @@ public class TransferenciaServiceImpl implements ITransferenciaService {
 		transferencia.setCuentaOrigen(ctaOrigen);
 		transferencia.setCuentaDestino(ctaDestino);
 		this.transferenciaRepository.insertar(transferencia);
+
+//		if (ctaOrigen.getTipo().equals("Ahorros")) {
+//			throw new RuntimeException();
+//		}
+
+		if (monto.compareTo(saldoOrigen) > 0) {
+			throw new RuntimeException();
+		}
 	}
 
 	@Override
