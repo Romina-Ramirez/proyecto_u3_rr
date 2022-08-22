@@ -32,6 +32,10 @@ public class Detalle {
 	@JoinColumn(name = "deta_fact_id")
 	private Factura factura;
 
+	@ManyToOne
+	@JoinColumn(name = "deta_prod_id")
+	private Producto producto;
+
 	@Override
 	public String toString() {
 		return "Detalle [id=" + id + ", cantidad=" + cantidad + ", subtotal=" + subtotal + ", factura=" + factura + "]";
@@ -68,6 +72,14 @@ public class Detalle {
 
 	public void setFactura(Factura factura) {
 		this.factura = factura;
+	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 
 }
