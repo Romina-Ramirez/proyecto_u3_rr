@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
