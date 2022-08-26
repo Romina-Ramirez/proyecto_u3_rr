@@ -11,7 +11,7 @@ import com.uce.edu.demo.repository.modelo.Producto;
 
 @Service
 public class ProductoServiceImpl implements IProductoService {
-	
+
 	@Autowired
 	private IProductoRepository productoRepository;
 
@@ -22,23 +22,7 @@ public class ProductoServiceImpl implements IProductoService {
 	}
 
 	@Override
-	public Producto buscar(Integer id) {
-		return this.productoRepository.leer(id);
-	}
-
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public void actualizar(Producto producto) {
-		this.productoRepository.actualizar(producto);
-	}
-
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public void eliminar(Integer id) {
-		this.productoRepository.eliminar(id);
-	}
-
-	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
 	public Producto buscarPorCodBarras(String codBarras) {
 		return this.productoRepository.leerPorCodBarras(codBarras);
 	}

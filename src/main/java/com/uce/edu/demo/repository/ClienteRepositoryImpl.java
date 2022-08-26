@@ -25,24 +25,6 @@ public class ClienteRepositoryImpl implements IClienteRepository {
 
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
-	public Cliente leer(Integer id) {
-		return this.entityManager.find(Cliente.class, id);
-	}
-
-	@Override
-	@Transactional(value = TxType.MANDATORY)
-	public void actualizar(Cliente cliente) {
-		this.entityManager.merge(cliente);
-	}
-
-	@Override
-	@Transactional(value = TxType.MANDATORY)
-	public void eliminar(Integer id) {
-		this.entityManager.remove(this.leer(id));
-	}
-
-	@Override
-	@Transactional(value = TxType.NOT_SUPPORTED)
 	public Cliente leerPorCedula(String cedula) {
 		TypedQuery<Cliente> myQuery = this.entityManager.createQuery("SELECT c FROM Cliente c WHERE c.cedula = :cedula",
 				Cliente.class);

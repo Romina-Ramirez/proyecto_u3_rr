@@ -24,21 +24,9 @@ public class ProductoRepositoryImpl implements IProductoRepository {
 	}
 
 	@Override
-	@Transactional(value = TxType.NOT_SUPPORTED)
-	public Producto leer(Integer id) {
-		return this.entityManager.find(Producto.class, id);
-	}
-
-	@Override
-	@Transactional(value = TxType.MANDATORY)
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void actualizar(Producto producto) {
 		this.entityManager.merge(producto);
-	}
-
-	@Override
-	@Transactional(value = TxType.MANDATORY)
-	public void eliminar(Integer id) {
-		this.entityManager.remove(this.leer(id));
 	}
 
 	@Override

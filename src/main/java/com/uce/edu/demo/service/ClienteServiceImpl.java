@@ -21,26 +21,4 @@ public class ClienteServiceImpl implements IClienteService {
 		this.clienteRepository.crear(cliente);
 	}
 
-	@Override
-	public Cliente buscar(Integer id) {
-		return this.clienteRepository.leer(id);
-	}
-
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public void actualizar(Cliente cliente) {
-		this.clienteRepository.actualizar(cliente);
-	}
-
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public void eliminar(Integer id) {
-		this.clienteRepository.eliminar(id);
-	}
-
-	@Override
-	public Cliente buscarPorCedula(String cedula) {
-		return this.clienteRepository.leerPorCedula(cedula);
-	}
-
 }
