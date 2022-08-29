@@ -20,5 +20,27 @@ public class ConsumoMetodosHighOrder {
 	public String consumirFunction(IPersonaFunction<String, Integer> funcion, Integer valor) {
 		return funcion.aplicar(valor);
 	}
+	
+	// Deber
+	public String consumirSupplierLibro(ILibroSupplier<String> funcion) {
+		String editorial = "Salamanca";
+		return funcion.getTitulo() + " - " + editorial;
+	}
+	
+	public void consumirConsumerLibro(ILibroConsumer<String> funcion, String autor) {
+		funcion.imprimirAutor(autor);
+	}
+	
+	public boolean consumirPredicateLibro(ILibroPredicate<String> funcion, String autor) {
+		return funcion.verificarAutor(autor);
+	}
+	
+	public Long consumirFunctionLibro(ILibroFunction<Long, String> funcion, String titulo) {
+		return funcion.contarLetras(titulo);
+	}
+	
+	public String consumirUnaryLibro(ILibroUnaryOperator<String> funcion, String num) {
+		return funcion.crearCodigo(num);
+	}
 
 }
