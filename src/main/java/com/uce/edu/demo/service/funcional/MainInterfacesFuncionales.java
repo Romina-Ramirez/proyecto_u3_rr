@@ -58,6 +58,8 @@ public class MainInterfacesFuncionales {
 		logger.info("Supplier JAVA");
 		Stream<String> test = Stream.generate(() -> "Romina2").limit(7);
 		test.forEach(cadena -> System.out.println(cadena));
+		
+		System.out.println();
 
 // 2. Consumer
 // 		Clases
@@ -78,6 +80,8 @@ public class MainInterfacesFuncionales {
 		logger.info("Consumer JAVA");
 		List<Integer> listaNumeros = Arrays.asList(1, 2, 3, 4, 5);
 		listaNumeros.forEach(numero -> System.out.println(numero));
+		
+		System.out.println();
 
 // 3. Predicate
 // 		Lambdas
@@ -92,6 +96,8 @@ public class MainInterfacesFuncionales {
 		logger.info("Predicate JAVA");
 		Stream<Integer> nuevaLista = listaNumeros.stream().filter(numero -> prueba(numero));
 		nuevaLista.forEach(numero -> System.out.println(numero));
+		
+		System.out.println();
 
 // 4. Function
 // 		Lambdas
