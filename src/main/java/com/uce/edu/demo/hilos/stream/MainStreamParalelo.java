@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class MainStreamParalelo {
 
-public static void main(String[] args) {
-		
+	public static void main(String[] args) {
+
 		long tiempoInicial = System.currentTimeMillis();
 
 		List<Integer> listaNumerosAlumnos = new ArrayList<>();
@@ -18,9 +18,9 @@ public static void main(String[] args) {
 
 		List<String> listaProcesada = listaNumerosAlumnos.parallelStream().map(numero -> convertirIdAlumno(numero))
 				.collect(Collectors.toList());
-		
+
 		listaProcesada.forEach(cadena -> System.out.println(cadena));
-		
+
 		long tiempoFinal = System.currentTimeMillis();
 
 		long Tiempo = (tiempoFinal - tiempoInicial) / 1000;
